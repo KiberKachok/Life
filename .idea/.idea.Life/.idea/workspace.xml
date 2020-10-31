@@ -20,8 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef0bbb7a-450d-4c83-b17e-ec8a6fa3ae7d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Life/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Life/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Life/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Life/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Biome.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Biome.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MapGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MapGenerator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +89,7 @@
       <updated>1603864078192</updated>
       <workItem from="1603864159867" duration="269000" />
       <workItem from="1604126870515" duration="5196000" />
+      <workItem from="1604143285216" duration="10429000" />
     </task>
     <servers />
   </component>
@@ -104,6 +108,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
@@ -113,5 +118,13 @@
       <screen x="0" y="0" width="1600" height="856" />
     </state>
     <state x="259" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.856@0.0.1600.856" timestamp="1603864416601" />
+    <state x="558" y="281" key="ANALYSIS_DLG_com.jetbrains.rider.actions.impl.cleanup.RiderCodeCleanupAction$actionPerformed$dlg$1" timestamp="1604151441346">
+      <screen x="0" y="0" width="1600" height="856" />
+    </state>
+    <state x="558" y="281" key="ANALYSIS_DLG_com.jetbrains.rider.actions.impl.cleanup.RiderCodeCleanupAction$actionPerformed$dlg$1/0.0.1600.856@0.0.1600.856" timestamp="1604151441346" />
+    <state x="96" y="96" width="1408" height="664" key="VCS.FileHistoryDialog" timestamp="1604144740526">
+      <screen x="0" y="0" width="1600" height="856" />
+    </state>
+    <state x="96" y="96" width="1408" height="664" key="VCS.FileHistoryDialog/0.0.1600.856@0.0.1600.856" timestamp="1604144740526" />
   </component>
 </project>

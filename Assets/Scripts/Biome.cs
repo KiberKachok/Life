@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class Biome
 {
-    [Range(0, 1)]
-    public float startHeight;
-    public Color startColor;
     public Color endColor;
     public int numSteps;
+    public Color startColor;
+
+    [Range(0, 1)] public float startHeight;
 }

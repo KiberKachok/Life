@@ -203,27 +203,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8283154255bebbf47bc15b9b115d5711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 32, y: 32}
-  textureAtlas: {fileID: 0}
-  seed: 9098.403
-  perlinNoiseScale: 0.1
-  waterDepth: 0.4
   edgeDepth: 0.4
-  water:
-    startHeight: 0
-    startColor: {r: 0.09011213, g: 0.22985192, b: 0.764151, a: 1}
-    endColor: {r: 0, g: 0.41195732, b: 0.8773585, a: 1}
-    numSteps: 5
-  sand:
-    startHeight: 0.345
-    startColor: {r: 0.8396226, g: 0.7541551, b: 0.06732824, a: 1}
-    endColor: {r: 0.745283, g: 0.6233909, b: 0, a: 1}
-    numSteps: 3
   grass:
-    startHeight: 0.453
-    startColor: {r: 0.07694735, g: 0.745283, b: 0.05273228, a: 1}
     endColor: {r: 0.10705023, g: 0.4056604, b: 0.044010334, a: 1}
     numSteps: 7
+    startColor: {r: 0.07694735, g: 0.745283, b: 0.05273228, a: 1}
+    startHeight: 0.453
+  perlinNoiseScale: 0.1
+  sand:
+    endColor: {r: 0.745283, g: 0.6233909, b: 0, a: 1}
+    numSteps: 3
+    startColor: {r: 0.8396226, g: 0.7541551, b: 0.06732824, a: 1}
+    startHeight: 0.345
+  seed: 9098.403
+  size: {x: 16, y: 8}
+  textureAtlas: {fileID: 0}
+  water:
+    endColor: {r: 0, g: 0.41195732, b: 0.8773585, a: 1}
+    numSteps: 5
+    startColor: {r: 0.09011213, g: 0.22985192, b: 0.764151, a: 1}
+    startHeight: 0
+  waterDepth: 0.4
 --- !u!4 &670924183
 Transform:
   m_ObjectHideFlags: 0
