@@ -37,9 +37,9 @@ public class MapGenerator : MonoBehaviour
         _meshRenderer = GetComponent<MeshRenderer>();
         _biomes = new[] {water, sand, grass};
         seed = Random.Range(0f, 10000f);
-        GenerateTexture();
         GenerateHeightMap();
         GenerateBiomeMap();
+        GenerateTexture();
         GenerateMesh();
 
         _gridGraph.center = new Vector3(size.x / 2f, 0, size.y / 2f);
@@ -62,16 +62,44 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateTexture()
     {
-        var texture = new Texture2D(_biomes.Sum(p => p.numSteps), 1);
-        var uvIndex = 0;
+        Color[] palette = new Color[_biomes.Sum((p => p.numSteps))];
+        var texture = new Texture2D(size.x, size.y);
+        var colorIndex = 0;
 
-        foreach (var biome in _biomes)
-            for (var i = 0; i < biome.numSteps; i++, uvIndex++)
+        foreach (var biome in _biomes) //palette generating
+            for (var i = 0; i < biome.numSteps; i++, colorIndex++)
             {
                 var color = biome.startColor * (biome.numSteps - 1 - i) / (biome.numSteps - 1)
                             + biome.endColor * i / (biome.numSteps - 1);
-                texture.SetPixel(uvIndex, 0, color);
+                palette[colorIndex] = color;
             }
+        
+        
+        for (var x = 0; x < size.x; x++)
+        for (var y = 0; y < size.y; y++)
+        {
+            var uvx = 0;
+        
+            for (var i = 0; i < _biomes.Length; i++)
+            {
+                var biome = _biomes[i];
+                var upperBorder = i == _biomes.Length - 1 ? 1 : _biomes[i + 1].startHeight;
+                var isNeedToBreak = false;
+                for (var j = 1; j <= biome.numSteps; j++)
+                    if (_heightMap[x, y] - biome.startHeight < (upperBorder - biome.startHeight) / biome.numSteps * j)
+                    {
+                        uvx += j - 1;
+                        isNeedToBreak = true;
+                        break;
+                    }
+
+                if (isNeedToBreak) break;
+                uvx += biome.numSteps;
+            }
+            
+            texture.SetPixel(x, y, palette[uvx]);
+        }
+
 
         texture.filterMode = FilterMode.Point;
         texture.Apply();
@@ -115,8 +143,7 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateMesh()
     {
-        var mesh = new Mesh {indexFormat = IndexFormat.UInt32};
-        mesh.name = "MapMesh";
+        var mesh = new Mesh {indexFormat = IndexFormat.UInt32, name = "MapMesh"};
 
         var vertices = new Vector3[size.x * size.y * 8];
         var triangles = new int[size.x * size.y * 12];
@@ -135,7 +162,7 @@ public class MapGenerator : MonoBehaviour
 
             var isWaterTile = _biomeMap[x, y] == 0;
             var height = isWaterTile ? -waterDepth : 0;
-            var uv = GetUv(x, y);
+            var uv = new Vector2((float)x / size.x, (float)y / size.y);
 
             vertices[vertNum] = new Vector3(x, height, y + 1);
             vertices[vertNum + 1] = new Vector3(x + 1, height, y + 1);
@@ -180,30 +207,6 @@ public class MapGenerator : MonoBehaviour
         mesh.RecalculateNormals();
         _meshFilter.mesh = mesh;
         _meshCollider.sharedMesh = mesh;
-        _meshRenderer.material.SetTexture("_MainTex", textureAtlas);
-    }
-
-    private Vector2 GetUv(int x, int y)
-    {
-        var uvx = 0;
-
-        for (var i = 0; i < _biomes.Length; i++)
-        {
-            var biome = _biomes[i];
-            var upperBorder = i == _biomes.Length - 1 ? 1 : _biomes[i + 1].startHeight;
-            var isNeedToBreak = false;
-            for (var j = 1; j <= biome.numSteps; j++)
-                if (_heightMap[x, y] - biome.startHeight < (upperBorder - biome.startHeight) / biome.numSteps * j)
-                {
-                    uvx += j - 1;
-                    isNeedToBreak = true;
-                    break;
-                }
-
-            if (isNeedToBreak) break;
-            uvx += biome.numSteps;
-        }
-
-        return new Vector2(1f / _biomes.Sum(p => p.numSteps) * uvx, 0);
+        _meshRenderer.material.mainTexture = textureAtlas;
     }
 }
