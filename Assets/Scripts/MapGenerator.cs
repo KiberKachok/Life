@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Pathfinding;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -20,12 +21,18 @@ public class MapGenerator : MonoBehaviour
     public Biome water;
     public Biome sand;
     public Biome grass;
-    
+
+    private AstarPath _astarPath;
+    private GridGraph _gridGraph;
+    private MeshCollider _meshCollider;
     private MeshFilter _meshFilter;
     private MeshRenderer _meshRenderer;
     
     private void Start()
     {
+        _astarPath = GetComponent<AstarPath>();
+        _gridGraph = _astarPath.data.gridGraph;
+        _meshCollider = GetComponent<MeshCollider>();
         _meshFilter = GetComponent<MeshFilter>();
         _meshRenderer = GetComponent<MeshRenderer>();
         _biomes = new[] {water, sand, grass};
@@ -34,6 +41,10 @@ public class MapGenerator : MonoBehaviour
         GenerateHeightMap();
         GenerateBiomeMap();
         GenerateMesh();
+
+        _gridGraph.center = new Vector3(size.x / 2f, 0, size.y / 2f);
+        _gridGraph.SetDimensions(size.x, size.y, 1);
+        _astarPath.Scan();
     }
 
 
@@ -105,6 +116,7 @@ public class MapGenerator : MonoBehaviour
     void GenerateMesh()
     {
         var mesh = new Mesh {indexFormat = IndexFormat.UInt32};
+        mesh.name = "MapMesh";
 
         var vertices = new Vector3[size.x * size.y * 8];
         var triangles = new int[size.x * size.y * 12];
@@ -167,6 +179,7 @@ public class MapGenerator : MonoBehaviour
         mesh.SetUVs(0, uvs);
         mesh.RecalculateNormals();
         _meshFilter.mesh = mesh;
+        _meshCollider.sharedMesh = mesh;
         _meshRenderer.material.SetTexture("_MainTex", textureAtlas);
     }
 
